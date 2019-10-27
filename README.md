@@ -1,3 +1,3 @@
 # askfm-qa-clawler
 
-![./docs/image/header.png]
+![img](./docs/image/header.png)
