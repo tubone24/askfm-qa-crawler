@@ -1,4 +1,4 @@
-# askfm-qa-clawler
+# askfm-qa-crawler
 
 ![img](./docs/image/header.png)
 
