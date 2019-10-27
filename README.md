@@ -20,9 +20,50 @@ This is a selenium tasks to crawl Ask.fm because of correcting QA list for Machi
 
 ## Background
 
+Among machine learning, there was a task to create a bot that responds to natural language using LSTM (a kind of RNN).
+
+At that time, a large amount of conversation corpus is required, but since I did not get a good conversation corpus, I decided to make a conversation corpus by crawling the Ask.fm question answer list with Selenium (Google Chrome) Did.
+
+I'm using Selenium for Python because my favorite programming language is Python.
+
 ## Install
 
+### Precondition
+
+- Python 3.6+
+- Google Chrome
+- [Google Chrome WebDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+  - Check your Chrome version and install suitable driver version.
+
+### PIP
+
+Install dependencies.
+
+```
+pip install -r requirements.txt
+```
+
 ## Usage
+
+### Create faces list (Account list)
+
+Before create conversation corpus, create `face list` because of crawling QA.
+
+First args, number of loop count.
+
+```
+python src/get_faces.py 100
+```
+
+After run script, get face list into `data/face_list.txt`
+
+### Create conversation corpus
+
+```
+python src/main.py
+```
+
+After run script, get conversation corpus into `data/askfm_data/foobar.txt`
 
 ## Contributing
 
