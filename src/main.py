@@ -3,6 +3,7 @@ from selenium import webdriver
 # from selenium.common.exceptions import ElementNotVisibleException
 from time import sleep
 import codecs
+from datetime import datetime
 
 # FIXME: Your Driver Path
 driver = webdriver.Chrome(executable_path="C:\Program Files (x86)\chromedriver\chromedriver.exe")
@@ -31,14 +32,16 @@ for face in faces:
         after_h = driver.execute_script("var h = window.pageYOffset; return h")
         if previous_h == after_h:
             break
-    print('Last page')
+    print("Scroll All Page {face} {time}".format(face=face, time=datetime.now()))
 
     page_source = driver.page_source
 
-    questions = driver.find_elements_by_class_name("streamItem_header")
-    answers = driver.find_elements_by_class_name("streamItem_content")
+    qa_elements = driver.find_elements_by_class_name("streamItem-answer")
 
-    q_and_a = [(q.find_element_by_tag_name('h2').text, a.text) for q, a in zip(questions, answers)]
+    print("QA content: {}".format(len(qa_elements)))
+
+    q_and_a = [(qa.find_element_by_class_name("streamItem_header").find_element_by_tag_name('h2').text,
+                qa.find_element_by_class_name("streamItem_content").text) for qa in qa_elements]
 
     with codecs.open("data/askfm_data/" + face + ".txt", "w", "utf-8") as f:
         for q, a in q_and_a:

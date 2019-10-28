@@ -25,7 +25,7 @@ for i in range(int(count)):
     tmp_faces = {f.text for f in face_tablet}
     faces = faces | tmp_faces
     print("face_length: {}".format(len(faces)))
-    sleep(3)
+    sleep(2)
     if i // 10 == 0:
         driver.refresh()
 
