@@ -1,6 +1,6 @@
 # coding:utf-8
 from selenium import webdriver
-# from selenium.common.exceptions import ElementNotVisibleException
+from selenium.common.exceptions import ElementNotVisibleException
 from time import sleep
 import codecs
 from datetime import datetime
@@ -40,8 +40,17 @@ for face in faces:
 
     print("QA content: {}".format(len(qa_elements)))
 
-    q_and_a = [(qa.find_element_by_class_name("streamItem_header").find_element_by_tag_name('h2').text,
-                qa.find_element_by_class_name("streamItem_content").text) for qa in qa_elements]
+    # q_and_a = [(qa.find_element_by_class_name("streamItem_header").find_element_by_tag_name('h2').text,
+    #             qa.find_element_by_class_name("streamItem_content").text) for qa in qa_elements]
+
+    q_and_a = []
+    for qa in qa_elements:
+        try:
+            q_and_a.append((qa.find_element_by_class_name("streamItem_header").find_element_by_tag_name('h2').text,
+                            qa.find_element_by_class_name("streamItem_content").text))
+        except ElementNotVisibleException as e:
+            print("ElementNotVisible: Skip QA: {}".format(e))
+            continue
 
     with codecs.open("data/askfm_data/" + face + ".txt", "w", "utf-8") as f:
         for q, a in q_and_a:
