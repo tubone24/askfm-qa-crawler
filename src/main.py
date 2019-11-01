@@ -22,7 +22,7 @@ faces.discard("")
 
 for face in faces:
     driver.get("https://ask.fm/" + face)
-    driver.execute_script("document.body.style.zoom='50%'")
+    driver.execute_script("document.body.style.zoom='33%'")
 
     while True:
         scroll_h = driver.execute_script("var h = window.pageYOffset; return h")
